@@ -3,6 +3,7 @@ import weatherService, {
   WeatherData,
   CanceledError,
 } from "./services/weather-service";
+import SearchForm from "./components/SearchForm";
 import "./App.css";
 
 function App() {
@@ -23,7 +24,11 @@ function App() {
     return () => weatherService.cancelRequest();
   }, [selectedCity]);
 
-  return <></>;
+  return (
+    <div className="container">
+      <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
+    </div>
+  );
 }
 
 export default App;

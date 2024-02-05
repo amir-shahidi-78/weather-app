@@ -1,0 +1,27 @@
+input {
+    border: 0;
+    outline: 0;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff; /* White background */
+    border-radius: 50%; /* Makes the button circular */
+    cursor: pointer;
+    border: none; /* Removes default button border */
+}
+
+.search-input {
+    flex-grow: 1;
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 15px;
+}
