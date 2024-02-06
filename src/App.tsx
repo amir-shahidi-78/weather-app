@@ -9,6 +9,7 @@ import WeatherDetail from "./components/WeatherDetail";
 import WeatherStatusIcon from "./components/WeatherStatusIcon";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
+import WeatherInfo from "./components/WeatherInfo";
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherData>();
@@ -32,10 +33,26 @@ function App() {
     <div className="container">
       <div className="card">
         <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
-        <WeatherStatusIcon condition="Rain" size={150} />
+        <WeatherStatusIcon
+          condition={weatherData?.weather?.[0]?.main ?? "Clouds"}
+          size={150}
+        />
+        <WeatherInfo
+          status={weatherData?.weather[0]?.main ?? ""}
+          temperature={weatherData?.main.temp ?? 1}
+          city={weatherData?.name ?? "Unkown"}
+        />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <WeatherDetail icon={<FaWind size={60} />} label="WindSpeed" />
-          <WeatherDetail icon={<WiHumidity size={60} />} label="Humidity" />
+          <WeatherDetail
+            value={weatherData?.wind.speed}
+            icon={<FaWind size={60} />}
+            label="WindSpeed"
+          />
+          <WeatherDetail
+            value={weatherData?.main.humidity}
+            icon={<WiHumidity size={60} />}
+            label="Humidity"
+          />
         </div>
       </div>
     </div>
