@@ -26,7 +26,9 @@ function App() {
 
   return (
     <div className="container">
-      <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
+      <div className="card">
+        <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
+      </div>
     </div>
   );
 }
