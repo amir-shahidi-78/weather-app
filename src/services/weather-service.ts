@@ -43,6 +43,7 @@ class WeatherService<T> {
       baseURL: this.baseUrl,
       params: {
         appid: this.apiKey,
+        units: "metric",
       },
     });
   }
