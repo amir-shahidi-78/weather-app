@@ -6,9 +6,10 @@ import weatherService, {
 import SearchForm from "./components/SearchForm";
 import "./App.css";
 import WeatherDetail from "./components/WeatherDetail";
+import WeatherStatusIcon from "./components/WeatherStatusIcon";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
-import { MdSunny } from "react-icons/md";
+
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherData>();
   const [selectedCity, setSelectedCity] = useState("");
@@ -31,6 +32,7 @@ function App() {
     <div className="container">
       <div className="card">
         <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
+        <WeatherStatusIcon condition="Rain" size={150} />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <WeatherDetail icon={<FaWind size={60} />} label="WindSpeed" />
           <WeatherDetail icon={<WiHumidity size={60} />} label="Humidity" />
