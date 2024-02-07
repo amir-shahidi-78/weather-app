@@ -1,3 +1,5 @@
+import styles from "./styles.module.css";
+
 interface Props {
   city: string | undefined;
   temperature: number | undefined;
@@ -6,9 +8,9 @@ interface Props {
 const WeatherInfo = ({ status, temperature, city }: Props) => {
   if (!status || !temperature || !city) return null;
   return (
-    <div>
+    <div className={styles["weather-info"]}>
       <h2>{status}</h2>
-      <p>{temperature}&deg;C</p>
+      <p className={styles["weather-info__temp"]}>{temperature}&deg;C</p>
       <p>{city}</p>
     </div>
   );
