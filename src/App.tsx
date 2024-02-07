@@ -38,30 +38,31 @@ function App() {
       <div className="card">
         <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
         {error && <p>{error}</p>}
-        <div>
-          <WeatherStatusIcon
-            condition={weatherData?.weather?.[0]?.main ?? "Clouds"}
-            size={150}
-          />
-          <WeatherInfo
-            status={weatherData?.weather[0]?.main ?? ""}
-            temperature={weatherData?.main.temp ?? 1}
-            city={weatherData?.name ?? "Unkown"}
-          />
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <WeatherDetail
-            value={weatherData?.wind.speed}
-            icon={<FaWind size={50} />}
-            label="WindSpeed"
-          />
 
-          <WeatherDetail
-            value={weatherData?.main.humidity}
-            icon={<WiHumidity size={50} />}
-            label="Humidity"
-          />
-        </div>
+        {!error && (
+          <div>
+            <div>
+              <WeatherStatusIcon condition={weatherData?.weather?.[0]?.main} />
+              <WeatherInfo
+                status={weatherData?.weather[0].main}
+                temperature={weatherData?.main.temp}
+                city={weatherData?.name}
+              />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <WeatherDetail
+                value={weatherData?.wind.speed}
+                icon={<FaWind size={50} />}
+                label="WindSpeed"
+              />
+              <WeatherDetail
+                value={weatherData?.main.humidity}
+                icon={<WiHumidity size={50} />}
+                label="Humidity"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

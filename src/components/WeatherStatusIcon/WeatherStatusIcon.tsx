@@ -1,29 +1,28 @@
-import { MdSunny } from "react-icons/md";
-import { FaRegSnowflake } from "react-icons/fa";
-import { IoMdRainy } from "react-icons/io";
-import { BsCloudSunFill } from "react-icons/bs";
+import clear from "../../assets/images/clear.png";
+import clouds from "../../assets/images/clouds.png";
+import snow from "../../assets/images/snow.png";
+import rain from "../../assets/images/rain.png";
+import { ReactNode } from "react";
 
 interface Props {
   condition: "Clear" | "Snow" | "Rain" | "Clouds" | undefined;
-  size?: number;
 }
 
 interface WeatherIconMapping {
-  [label: string]: (size: number) => React.ReactNode;
+  [label: string]: ReactNode;
 }
 
 const weatherIconMapping: WeatherIconMapping = {
-  Clear: (size: number) => <MdSunny size={size} />,
-  Snow: (size: number) => <FaRegSnowflake size={size} />,
-  Rain: (size: number) => <IoMdRainy size={size} />,
-  Clouds: (size: number) => <BsCloudSunFill size={size} />,
+  Clear: <img src={clear} />,
+  Snow: <img src={snow} />,
+  Rain: <img src={rain} />,
+  Clouds: <img src={clouds} />,
 };
 
-const WeatherStatusIcon = ({ condition, size = 70 }: Props) => {
+const WeatherStatusIcon = ({ condition }: Props) => {
   if (!condition) return null;
 
-  const icon = weatherIconMapping[condition];
-  return <div>{icon(size)}</div>;
+  return <div>{weatherIconMapping[condition]}</div>;
 };
 
 export default WeatherStatusIcon;
