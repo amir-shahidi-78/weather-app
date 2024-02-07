@@ -21,7 +21,7 @@ const SearchFom = ({ onSearchCity }: Props) => {
         type="text"
         onChange={(e) => setCity(e.target.value)}
       />
-      <button className={styles["search-btn"]} type="submit">
+      <button className={styles["search-btn"]} type="submit" disabled={!city}>
         <FiSearch opacity={0.7} />
       </button>
     </form>
