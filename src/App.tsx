@@ -41,14 +41,12 @@ function App() {
 
         {!error && (
           <div>
-            <div>
-              <WeatherStatusIcon condition={weatherData?.weather?.[0]?.main} />
-              <WeatherInfo
-                status={weatherData?.weather[0].main}
-                temperature={weatherData?.main.temp}
-                city={weatherData?.name}
-              />
-            </div>
+            <WeatherStatusIcon condition={weatherData?.weather?.[0]?.main} />
+            <WeatherInfo
+              status={weatherData?.weather[0].main}
+              temperature={weatherData?.main.temp}
+              city={weatherData?.name}
+            />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <WeatherDetail
                 value={weatherData?.wind.speed}
