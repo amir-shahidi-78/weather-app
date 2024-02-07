@@ -4,7 +4,7 @@ import { IoMdRainy } from "react-icons/io";
 import { BsCloudSunFill } from "react-icons/bs";
 
 interface Props {
-  condition: "Clear" | "Snow" | "Rain" | "Clouds";
+  condition: "Clear" | "Snow" | "Rain" | "Clouds" | undefined;
   size?: number;
 }
 
@@ -20,6 +20,8 @@ const weatherIconMapping: WeatherIconMapping = {
 };
 
 const WeatherStatusIcon = ({ condition, size = 70 }: Props) => {
+  if (!condition) return null;
+
   const icon = weatherIconMapping[condition];
   return <div>{icon(size)}</div>;
 };
