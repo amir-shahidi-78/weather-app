@@ -1,9 +1,11 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosInstance } from "axios";
 export { CanceledError } from "axios";
+
+export type WeatherCondition = "Clear" | "Rain" | "Snow" | "Clouds";
 
 export interface WeatherData {
   weather: {
-    main: "Rain" | "Snow" | "Clouds";
+    main: WeatherCondition;
     description: string;
   }[];
   main: {

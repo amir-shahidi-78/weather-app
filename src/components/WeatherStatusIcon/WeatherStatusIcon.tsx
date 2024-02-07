@@ -3,9 +3,10 @@ import clouds from "../../assets/images/clouds.png";
 import snow from "../../assets/images/snow.png";
 import rain from "../../assets/images/rain.png";
 import { ReactNode } from "react";
+import { WeatherCondition } from "../../services/weather-service";
 
 interface Props {
-  condition: "Clear" | "Snow" | "Rain" | "Clouds" | undefined;
+  condition: WeatherCondition | undefined;
 }
 
 interface WeatherIconMapping {
