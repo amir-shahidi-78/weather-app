@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import weatherService, {
   WeatherData,
   CanceledError,
+  CityNotFoundError,
 } from "./services/weather-service";
 import SearchForm from "./components/SearchForm";
 import "./App.css";
@@ -21,11 +22,14 @@ function App() {
 
     weatherService
       .getCurrentWeather(selectedCity)
-      .then((res) => setWeatherData(res.data))
+      .then((data) => {
+        setWeatherData(data);
+        setError("");
+      })
       .catch((err) => {
-        if (!(err instanceof CanceledError)) setError(err.message);
+        if (err instanceof CityNotFoundError) setError("City not found");
+        else if (!(err instanceof CanceledError)) setError(err.message);
       });
-
     return () => weatherService.cancelRequest();
   }, [selectedCity]);
 
@@ -33,24 +37,28 @@ function App() {
     <div className="container">
       <div className="card">
         <SearchForm onSearchCity={(city) => setSelectedCity(city)} />
-        <WeatherStatusIcon
-          condition={weatherData?.weather?.[0]?.main ?? "Clouds"}
-          size={150}
-        />
-        <WeatherInfo
-          status={weatherData?.weather[0]?.main ?? ""}
-          temperature={weatherData?.main.temp ?? 1}
-          city={weatherData?.name ?? "Unkown"}
-        />
+        {error && <p>{error}</p>}
+        <div>
+          <WeatherStatusIcon
+            condition={weatherData?.weather?.[0]?.main ?? "Clouds"}
+            size={150}
+          />
+          <WeatherInfo
+            status={weatherData?.weather[0]?.main ?? ""}
+            temperature={weatherData?.main.temp ?? 1}
+            city={weatherData?.name ?? "Unkown"}
+          />
+        </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <WeatherDetail
             value={weatherData?.wind.speed}
-            icon={<FaWind size={60} />}
+            icon={<FaWind size={50} />}
             label="WindSpeed"
           />
+
           <WeatherDetail
             value={weatherData?.main.humidity}
-            icon={<WiHumidity size={60} />}
+            icon={<WiHumidity size={50} />}
             label="Humidity"
           />
         </div>

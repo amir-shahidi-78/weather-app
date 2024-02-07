@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 export { CanceledError } from "axios";
 
 export interface WeatherData {
@@ -48,10 +48,18 @@ class WeatherService<T> {
     });
   }
   getCurrentWeather = (cityName: string) => {
-    return this.client.get<T>("", {
+    const response = this.client.get<T>("", {
       signal: this.controller.signal,
       params: { q: cityName },
     });
+    return response
+      .then((res) => res.data)
+      .catch((err) => {
+        if (err.response && err.response.status === 404) {
+          throw new CityNotFoundError("City not found");
+        }
+        throw err;
+      });
   };
 
   cancelRequest = () => {
@@ -61,3 +69,4 @@ class WeatherService<T> {
 
 const weatherService = new WeatherService<WeatherData>(apiKey, baseUrl);
 export default weatherService;
+export class CityNotFoundError extends Error {}
