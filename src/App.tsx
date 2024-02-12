@@ -1,9 +1,3 @@
-import { useEffect, useState } from "react";
-import weatherService, {
-  WeatherData,
-  CanceledError,
-  CityNotFoundError,
-} from "./services/weather-service";
 import SearchForm from "./components/SearchForm";
 import "./App.css";
 import WeatherDetail from "./components/WeatherDetail";
@@ -11,27 +5,10 @@ import WeatherStatusIcon from "./components/WeatherStatusIcon";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
 import WeatherInfo from "./components/WeatherInfo";
+import useWeather from "./hooks/useWeather";
 
 function App() {
-  const [weatherData, setWeatherData] = useState<WeatherData>();
-  const [selectedCity, setSelectedCity] = useState("");
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (!selectedCity) return;
-
-    weatherService
-      .getCurrentWeather(selectedCity)
-      .then((data) => {
-        setWeatherData(data);
-        setError("");
-      })
-      .catch((err) => {
-        if (err instanceof CityNotFoundError) setError("City not found");
-        else if (!(err instanceof CanceledError)) setError(err.message);
-      });
-    return () => weatherService.cancelRequest();
-  }, [selectedCity]);
+  const { weatherData, error, setSelectedCity } = useWeather();
 
   return (
     <div className="container">
