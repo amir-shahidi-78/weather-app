@@ -6,6 +6,7 @@ import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
 import WeatherInfo from "./components/WeatherInfo";
 import useWeather from "./hooks/useWeather";
+import Flex from "./components/Flex";
 
 function App() {
   const { weatherData, error, setSelectedCity } = useWeather();
@@ -24,7 +25,7 @@ function App() {
               temperature={weatherData?.main.temp}
               city={weatherData?.name}
             />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Flex justifyContent="space-between" marginTop={"22px"}>
               <WeatherDetail
                 value={weatherData?.wind.speed}
                 icon={<FaWind size={50} />}
@@ -35,7 +36,7 @@ function App() {
                 icon={<WiHumidity size={50} />}
                 label="Humidity"
               />
-            </div>
+            </Flex>
           </div>
         )}
       </div>
